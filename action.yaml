@@ -44,8 +44,8 @@ runs:
       shell: bash
       run: |
         echo "Fetch lock files for Chaos Tooklkit"
-        curl -o pdm.lock --silent https://raw.githubusercontent.com/chaostoolkit/actions/main/pdm.lock
-        curl -o pyproject.toml --silent https://raw.githubusercontent.com/chaostoolkit/actions/main/pyproject.toml
+        curl -o pdm.lock --silent https://raw.githubusercontent.com/chaostoolkit/run-action/main/pdm.lock
+        curl -o pyproject.toml --silent https://raw.githubusercontent.com/chaostoolkit/run-action/main/pyproject.toml
 
     - name: Set up the Python Package Manager
       uses: pdm-project/setup-pdm@v4
