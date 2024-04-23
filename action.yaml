@@ -125,7 +125,7 @@ runs:
         fi
 
     - name: Upload Chaos Toolkit artifacts
-      if: ${{ github.event.inputs.upload-results-as-artifacts == 'true' }}
+      if: ${{ inputs.upload-results-as-artifacts == 'true' }}
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.result-artifact-name }}
