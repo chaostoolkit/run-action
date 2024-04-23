@@ -110,6 +110,8 @@ runs:
 
         RUN_TEMP_DIR="/tmp/ctk"
 
+        mkdir -p $RUN_TEMP_DIR
+
         echo "Run the experiment with the chaos command"
 
         if [ "${{ inputs.verbose }}" == "true" ]; then
