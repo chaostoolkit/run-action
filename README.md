@@ -1,4 +1,11 @@
-# Chaos Toolkit Run Action
+<h2 align="center">
+  <br>
+  <p align="center"><img src="https://avatars.githubusercontent.com/u/32068152?s=200&v=4"></p>
+</h2>
+
+<h4 align="center">Chaos Toolkit - Chaos Engineering for All Engineers</h4>
+
+---
 
 A [GitHub Action](https://github.com/features/actions) for running a Chaos
 Toolkit experiment using the [Chaos Toolkit CLI](https://chaostoolkit.org/).
