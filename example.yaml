@@ -1,0 +1,14 @@
+name: Execute a Chaos Toolkit Experiment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-chaostoolkit-experiment:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: chaostoolkit/run-action@v0
+      with:
+        experiment-file: "./experiment.json"
+        working-dir: "subdir"

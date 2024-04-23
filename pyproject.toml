@@ -1,0 +1,49 @@
+[project]
+name = "chaostoolkit-gh-actions"
+version = "0.1.0"
+description = "Chaos Toolkit GitHub Actions Dependencies Manager"
+authors = [
+    {name = "Sylvain Hellegouarch", email = "sh@defuze.org"},
+]
+dependencies = [
+    "chaostoolkit>=1.19.0",
+    "chaostoolkit-addons>=0.11.0",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+
+[project.optional-dependencies]
+gcp = [
+    "chaostoolkit-google-cloud-platform>=0.23.0",
+]
+k8s = [
+    "chaostoolkit-kubernetes>=0.38.2",
+    "chaostoolkit-istio>=0.4.1",
+    "chaostoolkit-prometheus>=0.6.0",
+]
+aws = [
+    "chaostoolkit-aws>=0.33.0",
+    "aws-az-failure-chaostoolkit>=0.1.10",
+]
+otel = [
+    "chaostoolkit-opentracing>=0.17.0",
+]
+slack = [
+    "chaostoolkit-slack>=0.10.0",
+]
+
+# leave empty as it's used for user specific extra dependencies
+extra = []
+
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.resolution]
+prefer-binary = ":all:"

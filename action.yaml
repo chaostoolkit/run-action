@@ -1,0 +1,108 @@
+name: 'Chaos Toolkit Run Workflow'
+description: 'Run a Chaos Toolkit Experiment'
+author: 'Chaos Toolkit'
+branding:
+  icon: "loader"
+  color: "yellow"
+inputs:
+  experiment-file:
+    description: "The path of the experiment to run relatove to the working directory"
+    required: true
+    default: "./experiment.json"
+  working-dir:
+    description: "The directory where the experiment will be run from"
+    required: false
+    default: "."
+  verbose:
+    description: "Make the run verbose"
+    required: false
+    default: "false"
+  install-dependencies:
+    description: "Specify the dependencies groups to install"
+    required: false
+    default: ""
+  dependencies-file:
+    description: "Specify a file containing your own Python dependencies to be also installed"
+    required: false
+    default: ""
+  python-version:
+    description: "The python version to use"
+    required: false
+    default: "3.11"
+  github-token:
+    description: "The GitHub token to commit the results"
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: "composite"
+  steps:
+    - name: Fetch Dependencies Lock
+      shell: bash
+      run: |
+        echo "Fetch lock files for Chaos Tooklkit"
+        curl -o pdm.lock --silent https://raw.githubusercontent.com/chaostoolkit/actions/main/pdm.lock
+        curl -o pyproject.toml --silent https://raw.githubusercontent.com/chaostoolkit/actions/main/pyproject.toml
+
+    - name: Set up the Python Package Manager
+      uses: pdm-project/setup-pdm@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: true
+        prerelease: false
+
+    - name: Install Chaos Toolkit
+      shell: bash
+      run: |
+        echo "Install Chaos Toolkit"
+        pdm sync --prod --no-editable --no-self --fail-fast --without gcp --without aws --without k8s --without slack --without otel
+
+    - name: Install Chaos Toolkit Dependencies (if requested)
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.install-dependencies }}" ]; then
+          IFS=';' read -ra GROUP <<< "${{ inputs.install-dependencies }}"
+          for group in "${GROUP[@]}"; do
+            echo "Installing dependencies from group: $group"
+            pdm sync --no-editable --no-self --fail-fast --with ${group}
+          done
+        fi
+
+    - name: Install Your Dependencies (if requested)
+      shell: bash
+      run: |
+        DEPS_FILE="./${{ inputs.working-dir }}/${{ inputs.dependencies-file}}"
+        
+        if [ -f $DEPS_FILE ]; then
+          echo "Install extra dependencies from $DEPS_FILE"
+          pdm add --group extra --no-editable --no-self --fail-fast $(<$DEPS_FILE)
+        fi
+
+    - name: Display Chaos Toolkit info
+      shell: bash
+      run: |
+        echo "Chaos Toolkit environment info"
+        $(pdm venv activate)
+
+        chaos info core
+        chaos info extensions
+
+    - name: Add bin directories to the PATH
+      shell: bash
+      run: |
+        mkdir -p $HOME/bin
+        echo "Adding $HOME/bin to PATH"
+
+        mkdir -p $HOME/${{ inputs.working-dir }}/bin
+        echo "Adding $HOME/${{ inputs.working-dir }}/bin to PATH"
+
+        echo "PATH=$PATH:$HOME/${{ inputs.working-dir }}/bin:$HOME/bin" >> $GITHUB_ENV
+
+    - name: Execute the Chaos Toolkit Experiment
+      working-directory: ${{ inputs.working-dir }}
+      shell: bash
+      run: |
+        echo "Enable the Python environment"
+        $(pdm venv -p $GITHUB_WORKSPACE activate)
+
+        echo "Run the experiment with the chaos command"
+        chaos run ${{ inputs.experiment-file }}
