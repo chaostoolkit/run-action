@@ -29,6 +29,10 @@ inputs:
     description: "The python version to use"
     required: false
     default: "3.11"
+  upload-results-as-artifacts:
+    description: "Upload Chaos Toolkit results (logs and journal) as job artifacts"
+    required: false
+    default: "true"
   github-token:
     description: "The GitHub token to commit the results"
     required: false
@@ -104,10 +108,21 @@ runs:
         echo "Enable the Python environment"
         $(pdm venv -p $GITHUB_WORKSPACE activate)
 
+        RUN_TEMP_DIR="/tmp/ctk"
+
         echo "Run the experiment with the chaos command"
 
         if [ "${{ inputs.verbose }}" == "true" ]; then
-          chaos --verbose run ${{ inputs.experiment-file }}
+          chaos --log-file $RUN_TEMP_DIR/chaostoolkit.log --verbose run --journal-path $RUN_TEMP_DIR/journal.json ${{ inputs.experiment-file }}
         else
-          chaos run ${{ inputs.experiment-file }}
+          chaos --log-file $RUN_TEMP_DIR/chaostoolkit.log run --journal-path $RUN_TEMP_DIR/journal.json ${{ inputs.experiment-file }}
         fi
+
+    - name: Upload Chaos Toolkit artifacts
+      if: ${{ inputs.upload-results-as-artifacts == "true" }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: chaostoolkit-results
+        path: |
+          /tmp/ctk/chaostoolkit.log
+          /tmp/ctk/journal.json
