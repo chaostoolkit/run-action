@@ -43,6 +43,7 @@ These are passed to the action using `with`.
 | install-dependencies | "" | Automatically install Chaos Toolkit dependencies. Semi-column separated list from available groups: `gcp`, `aws`, `k8s`, `otel` and `slack` |
 | dependencies-file | "" | File of extra dependencies to install more Python packages. For instance `requirements.txt` |
 | upload-results-as-artifacts | "true" | Upload the Chaos Toolkit journal and log files as job artifacts |
+| result-artifact-name | "chaostoolkit-results" | Set the name of the uploaded artifact |
 
 ## Various notes
 
