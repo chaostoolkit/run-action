@@ -105,4 +105,9 @@ runs:
         $(pdm venv -p $GITHUB_WORKSPACE activate)
 
         echo "Run the experiment with the chaos command"
-        chaos run ${{ inputs.experiment-file }}
+
+        if [ "${{ inputs.verbose }}" == "true" ]; then
+          chaos --verbose run ${{ inputs.experiment-file }}
+        else
+          chaos run ${{ inputs.experiment-file }}
+        fi
