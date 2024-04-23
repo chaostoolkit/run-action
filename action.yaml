@@ -33,6 +33,10 @@ inputs:
     description: "Upload Chaos Toolkit results (logs and journal) as job artifacts"
     required: false
     default: "true"
+  result-artifact-name:
+    description: "Name of the artifact file uploaded to the job"
+    required: false
+    default: "chaostoolkit-results"
   github-token:
     description: "The GitHub token to commit the results"
     required: false
@@ -121,10 +125,10 @@ runs:
         fi
 
     - name: Upload Chaos Toolkit artifacts
-      if: ${{ always() }} && inputs.upload-results-as-artifacts == 'true'
+      if: ${{ !cancelled() }} && inputs.upload-results-as-artifacts == 'true'
       uses: actions/upload-artifact@v4
       with:
-        name: chaostoolkit-results
+        name: ${{ inputs.result-artifact-name }}
         path: |
           /tmp/ctk/chaostoolkit.log
           /tmp/ctk/journal.json
