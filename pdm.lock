@@ -269,7 +269,7 @@ files = [
 
 [[package]]
 name = "chaostoolkit-aws"
-version = "0.33.0"
+version = "0.34.0"
 requires_python = ">=3.8"
 summary = "AWS extension for the Chaos Toolkit"
 groups = ["aws"]
@@ -280,19 +280,19 @@ dependencies = [
     "requests>=2.31.0",
 ]
 files = [
-    {file = "chaostoolkit_aws-0.33.0-py3-none-any.whl", hash = "sha256:59abb92ff15ba3d7adf863fc6f76f8b1971d81dcdc35036270290f6e6f7a932c"},
-    {file = "chaostoolkit_aws-0.33.0.tar.gz", hash = "sha256:7e27008f11ade80085b794e69bda7ef466cf0113e366aa4376b967bad10e7d98"},
+    {file = "chaostoolkit_aws-0.34.0-py3-none-any.whl", hash = "sha256:7c0305024fb9ece03d788486bd3528d6aac94ca007ff1d1df7e589d38fb4a705"},
+    {file = "chaostoolkit_aws-0.34.0.tar.gz", hash = "sha256:2badcfb97561cdfe68c5e1cf78dde6f560a38af9064d78bec1cd23fffdd812b6"},
 ]
 
 [[package]]
 name = "chaostoolkit-google-cloud-platform"
-version = "0.23.0"
+version = "0.32.1"
 requires_python = ">=3.8"
 summary = "Google Cloud Platform extension for the Chaos Toolkit"
 groups = ["gcp"]
 dependencies = [
     "chaostoolkit-kubernetes>=0.34.1",
-    "chaostoolkit-lib>=1.42.0",
+    "chaostoolkit-lib>=1.43.0",
     "dateparser>=1.2.0",
     "google-api-python-client>=2.118.0",
     "google-auth-httplib2>=0.2.0",
@@ -303,13 +303,14 @@ dependencies = [
     "google-cloud-containeranalysis>=2.14.1",
     "google-cloud-logging>=3.9.0",
     "google-cloud-monitoring>=2.19.1",
+    "google-cloud-network-connectivity>=2.4.2",
     "google-cloud-run>=0.10.3",
     "google-cloud-storage>=2.14.0",
     "grafeas>=1.9.1",
 ]
 files = [
-    {file = "chaostoolkit_google_cloud_platform-0.23.0-py3-none-any.whl", hash = "sha256:17a907424d38cfe6abd55723890d16bdf1807a2b8093e1cce42e6d19a6684ea5"},
-    {file = "chaostoolkit_google_cloud_platform-0.23.0.tar.gz", hash = "sha256:a760f907f2fa25148f4ee91f29316f307ee55adf6ce21399113243a2302c2976"},
+    {file = "chaostoolkit_google_cloud_platform-0.32.1-py3-none-any.whl", hash = "sha256:46ef0bacba3c11e2a1a1efb6c588838af0ec91ceb426de4cf309604736044ac6"},
+    {file = "chaostoolkit_google_cloud_platform-0.32.1.tar.gz", hash = "sha256:851cc17554b487f05b888a278cea5f4ce611bfb330339ab7401ea98dcac98c0a"},
 ]
 
 [[package]]
@@ -329,7 +330,7 @@ files = [
 
 [[package]]
 name = "chaostoolkit-kubernetes"
-version = "0.38.2"
+version = "0.39.0"
 requires_python = ">=3.8"
 summary = "Chaos Toolkit Extension for Kubernetes"
 groups = ["gcp", "k8s"]
@@ -340,13 +341,13 @@ dependencies = [
     "pyyaml>=6.0.1",
 ]
 files = [
-    {file = "chaostoolkit_kubernetes-0.38.2-py3-none-any.whl", hash = "sha256:c91dfa4d8380481cd7b8d4a42e385cb746f1a2fa16bfa276d1443dc2fe8a4a61"},
-    {file = "chaostoolkit_kubernetes-0.38.2.tar.gz", hash = "sha256:74da52827bd70a98a9065303b42481c8f56ef7dca061784310fb195072b9e79d"},
+    {file = "chaostoolkit_kubernetes-0.39.0-py3-none-any.whl", hash = "sha256:82facd35f67231b787da923d1fa9a99e219abfe65064cb99cff2198728a55be8"},
+    {file = "chaostoolkit_kubernetes-0.39.0.tar.gz", hash = "sha256:34fd38b96f673b827adad9b3e773b867a040b492f3d3d3ffd795dfa9148183ba"},
 ]
 
 [[package]]
 name = "chaostoolkit-lib"
-version = "1.42.1"
+version = "1.43.2"
 requires_python = ">=3.8"
 summary = "Chaos Toolkit core library"
 groups = ["aws", "default", "gcp", "k8s", "otel", "slack"]
@@ -359,8 +360,8 @@ dependencies = [
     "requests>=2.31.0",
 ]
 files = [
-    {file = "chaostoolkit_lib-1.42.1-py3-none-any.whl", hash = "sha256:06c33e6328ab893052baf50374f095a521fd5d3c4098f79e8fef75da892edf70"},
-    {file = "chaostoolkit_lib-1.42.1.tar.gz", hash = "sha256:83210fcfcbe4eb05b7fc882985eee50562a909ed28d9512e80a50404e0a51148"},
+    {file = "chaostoolkit_lib-1.43.2-py3-none-any.whl", hash = "sha256:3fc7dfbd09ea80ba2179c0d0d0e7bd8cd1c688673ac8d2c16e94d6f434f2a79b"},
+    {file = "chaostoolkit_lib-1.43.2.tar.gz", hash = "sha256:44ec0e5abc7e307b99efd7f9cc5cc8b9f77c9b5cdbb18657afa40b2b5aeb8f36"},
 ]
 
 [[package]]
@@ -910,6 +911,24 @@ dependencies = [
 files = [
     {file = "google-cloud-monitoring-2.21.0.tar.gz", hash = "sha256:e7b1c8758fc3563ffb9a347bc5172e2782f44c121bc80fc15283e289cff675bf"},
     {file = "google_cloud_monitoring-2.21.0-py2.py3-none-any.whl", hash = "sha256:1b174e656a3bfd767c269bf2ba023b40e0a80a85e36ed0b75bb272be65e76904"},
+]
+
+[[package]]
+name = "google-cloud-network-connectivity"
+version = "2.4.3"
+requires_python = ">=3.7"
+summary = "Google Cloud Network Connectivity API client library"
+groups = ["gcp"]
+dependencies = [
+    "google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1",
+    "google-auth!=2.24.0,!=2.25.0,<3.0.0dev,>=2.14.1",
+    "grpc-google-iam-v1<1.0.0dev,>=0.12.4",
+    "proto-plus<2.0.0dev,>=1.22.3",
+    "protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5",
+]
+files = [
+    {file = "google-cloud-network-connectivity-2.4.3.tar.gz", hash = "sha256:d5fb763723fef1824f657c04be508eaa0b87132a53850ee2c1a3d7c8f5cb873e"},
+    {file = "google_cloud_network_connectivity-2.4.3-py2.py3-none-any.whl", hash = "sha256:7fd2b34e146fbac864ce254df67315eb1c7eb749a76ceec61f1ef8bfa2f703a4"},
 ]
 
 [[package]]
