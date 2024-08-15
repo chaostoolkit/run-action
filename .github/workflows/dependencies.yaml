@@ -11,6 +11,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update dependencies
-        uses: pdm-project/update-deps-action@v1.7
+        uses: pdm-project/update-deps-action@main
         with:
           sign-off-commit: "true"
